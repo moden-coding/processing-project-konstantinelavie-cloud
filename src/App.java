@@ -3,18 +3,36 @@ import processing.core.*;
 public class App extends PApplet {
   float heroX = 1500;
   float heroY = 500;
+  float x = 1500;
+  float y = 500;
+
   float size = 64;
   float baseY = 500 + size;
   float baseX = 1500 + size;
   float spikeX = 900;
-  float spikeY = heroY;
-  float spikeWidth = 80;
   float spikeHeight = 64;
+  float spikeY = spikeX + spikeHeight;
+  float spikeWidth = 80;
+
   boolean stopped = false; // becomes true when the cube hits the spike
   float speed = 5; // how fast the cube moves left
   // jumping stuff...
   float ySpeed = 0; // vertical speed
   boolean jumping = false; // keeps track if cube is in the air
+
+  // spike
+  float rightBaseX;
+  float apexX;
+  float overlapTop;
+  float overlapBottom;
+  float tTop;
+  float tBottom;
+  float leftAtTop;
+  float leftAtBottom;
+  float rightAtTop;
+  float rightAtBottom;
+  float triLeftMax;
+  float triRightMax;
 
   public boolean spikecollisionandalign() { // returns true if the square is touching (or overlapping) the spike
     float rightBaseX = spikeX + spikeWidth;
@@ -26,7 +44,7 @@ public class App extends PApplet {
 
     if (overlapTop > overlapBottom) {
       // no vertical overlap -> no collision
-      return false; 
+      return false;
     }
 
     // some code to find left and right triangle edge "x" at a given vertical
@@ -83,7 +101,7 @@ public class App extends PApplet {
     // cube
 
     // --- cube movement ---
-    heroX = heroX - 5;
+    heroX = heroX - 2;
     if (heroX < -size) {
       heroX = 1500; // reset cube when off screen
     }
@@ -102,18 +120,18 @@ public class App extends PApplet {
     }
 
     // --- collision detection with spike ---
-    
+
     float spikeTop = 500 + size - spikeHeight;
 
-    if (baseX > spikeX && 1500 < spikeX + spikeWidth && baseY > spikeTop) {
-      noLoop(); // stop the sketch when collision happens
+    if (baseX >= spikeX && heroX <= spikeX + spikeWidth) {
+      noLoop(); // stop the sketch when collision happens)
     }
     // cube
     stroke(0);
     strokeWeight(3);
     fill(255);
     rect(heroX, heroY, size, size);
-    
+
   }
 
   public void keyPressed() {
