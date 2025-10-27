@@ -121,8 +121,7 @@ public class App extends PApplet {
 
     // --- collision detection with spike ---
 
-    float spikeTop = 500 + size - spikeHeight;
-
+    
     if (baseX >= spikeX && heroX <= spikeX + spikeWidth) {
       noLoop(); // stop the sketch when collision happens)
     }
@@ -134,7 +133,7 @@ public class App extends PApplet {
 
   }
 
-  public void keyPressed() {
+         public void keyPressed() {
     // If spacebar is pressed and cube is NOT already jumping
     if (!jumping && key == ' ') {
       jumping = true;

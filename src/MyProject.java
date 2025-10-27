@@ -10,16 +10,11 @@ public class MyProject extends PApplet {
     float size = 64;
     float heroX = 1500;
     float heroY = 500;
-    float spikeX = 900;
-    float spikeHeight = 64;
-    float spikeWidth = 80;
     float ySpeed = 0;
     boolean jumping = false;
-
-    public void collisionDetection() {
-
-    }
-
+    boolean stopped = false; // true when collision
+    float speed = 5;
+    int scene = 1;
     public void settings() {
         size(1500, 700);
     }
@@ -39,31 +34,37 @@ public class MyProject extends PApplet {
         if (heroX < -size) {
             heroX = 1500; // reset cube when off screen
         }
-        if (jumping) {
-        heroY = heroY + ySpeed;
-        ySpeed = ySpeed + 1; // gravity pulls down
-        
+       
 
-      // stop at the ground
-      if (heroY > 500) {
-        heroY = 500;
-        ySpeed = 0;
-        jumping = false;
-      }
-    }
+        if (jumping) {
+            heroY = heroY + ySpeed;
+            ySpeed = ySpeed + 1; // gravity pulls down
+
+            // stop at the ground
+            if (heroY > 500) {
+                heroY = 500;
+                ySpeed = 0;
+                jumping = false;
+            }
+        }
 
         strokeWeight(2);
         stroke(255);
         fill(0);
-        float spikeTop = y + spikeHeight; // top of spike
-        triangle(spikeX, spikeTop, spikeX + spikeWidth, spikeTop, spikeX + spikeWidth / 2, spikeTop - spikeHeight);
+        rect(900, 300, size, size);
 
     }
+
+   // public boolean collisionDetection() {
+      
+        
+    
+
     public void keyPressed() {
-    // If spacebar is pressed and cube is NOT already jumping
-    if (!jumping && key == ' ') {
-      jumping = true;
-      ySpeed = -20; // jump upward
+        // If spacebar is pressed and cube is NOT already jumping
+        if (!jumping && key == ' ') {
+            jumping = true;
+            ySpeed = -20; // jump upward
+        }
     }
-  }
 }
