@@ -88,7 +88,8 @@ public class MyProject extends PApplet {
         if (scene == 2) {
            fill(255);
            textSize(30);
-           text("Score: " + score, 55, 15);
+           text("Score: " + score, 60, 15);
+           text("Current Speed: " + rectXSpeed, 125, 50);
             
             // draw base
             strokeWeight(2);
